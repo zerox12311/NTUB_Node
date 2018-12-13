@@ -18,4 +18,31 @@ router.post('/', async (req, res, next) => {
   res.send(result);
 });
 
+router.put('/:id', async (req, res, next) => {
+  console.log(req.body);
+  console.log(req.params.id);
+  let result = await db.Blog.update(
+    {
+      title: req.body.title,
+      content: req.body.content,
+      remark: req.body.remark,
+    }, {
+      where: {
+        id: req.params.id
+      }
+    }
+  );
+
+  res.send(result);
+});
+
+router.delete('/:id', async (req, res, next) => {
+  let result = await db.Blog.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
+  res.send(result.toString());
+});
+
 module.exports = router;
