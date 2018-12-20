@@ -9,6 +9,14 @@ router.get('/', async function (req, res, next) {
   res.send(result);
 });
 
+
+router.get('/:id', async function (req, res, next) {
+  // res.send('respond with a resource');
+  console.log(req.params.id);
+  let result = await db.Blog.findById(req.params.id);
+  res.send(result);
+});
+
 router.post('/', async (req, res, next) => {
   let result = await db.Blog.create({
     title: req.body.title,
